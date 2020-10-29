@@ -1,3 +1,4 @@
+
 appraise 'spree-4-0' do
   gem 'spree', '~> 4.0.0'
   gem 'spree_auth_devise', '~> 4.0.0'
