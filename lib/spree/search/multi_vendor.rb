@@ -14,7 +14,8 @@ module Spree::Search
           },
           sort_by: sort_by
         },
-        current_currency: current_currency
+        current_currency: current_currency,
+        current_site_id: current_site_id,
       ).execute
       base_scope = add_search_scopes(base_scope)
       base_scope = add_eagerload_scopes(base_scope)
