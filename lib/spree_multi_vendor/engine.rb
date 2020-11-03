@@ -13,6 +13,8 @@ module SpreeMultiVendor
 
     initializer 'spree.multi_vendor.environment', before: :load_config_initializers do
       Spree::Config.searcher_class = Spree::Search::MultiVendor
+      Spree::Frontend::Config[:products_filters] = %w(keywords price sort_by vendors)
+      Spree::Frontend::Config[:additional_filters_partials] = %w(vendors)
     end
 
     def self.activate
@@ -22,8 +24,7 @@ module SpreeMultiVendor
         end
       end
 
-      Spree::Frontend::Config[:products_filters] = %w(keywords price sort_by vendors)
-      Spree::Frontend::Config[:additional_filters_partials] = %w(vendors)
+
       ApplicationController.send :include, SpreeMultiVendor::MultiVendorHelpers
     end
 
