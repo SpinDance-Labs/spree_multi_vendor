@@ -11,6 +11,10 @@ module SpreeMultiVendor
       g.test_framework :rspec
     end
 
+    initializer 'spree.multi_vendor.environment', before: :load_config_initializers do
+      Spree::Config.searcher_class = Spree::Search::MultiVendor
+    end
+
     def self.activate
       ['app', 'lib'].each do |dir|
         Dir.glob(File.join(File.dirname(__FILE__), "../../#{dir}/**/*_decorator*.rb")) do |c|
@@ -20,7 +24,6 @@ module SpreeMultiVendor
 
       Spree::Frontend::Config[:products_filters] = %w(keywords price sort_by vendors)
       Spree::Frontend::Config[:additional_filters_partials] = %w(vendors)
-      Spree::Config.searcher_class = Spree::Search::MultiVendor
       ApplicationController.send :include, SpreeMultiVendor::MultiVendorHelpers
     end
 
